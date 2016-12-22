@@ -59,6 +59,38 @@
 
 <script>
 
+
+function playSound(e) {
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+  // console.log(audio);
+
+  // console.log(key);
+
+  if(!audio) return; // stop the function from running
+
+  // the audio file is already playing so we want it to start at the beginning instead of
+
+  audio.currentTime = 0; // rewind the audio file to the start
+  audio.play();
+
+  // same as key.addClass('playing');
+  key.classList.add('playing');
+  // use a transition end event
+}
+
+function removeTransition(e) {
+  if(e.propertyName !== 'transform') return; // skip it if it's not a transform
+  this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+window.addEventListener('keydown', playSound);
+
+
 </script>
 
 
