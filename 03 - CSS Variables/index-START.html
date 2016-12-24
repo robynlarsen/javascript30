@@ -26,6 +26,22 @@
       misc styles, nothing to do with CSS variables
     */
 
+    :root {
+      --base: #990000;
+      --spacing: 10px;
+      --blue: 10px;
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .h1 {
+      color: var(--base);
+    }
+
     body {
       text-align: center;
     }
@@ -48,6 +64,20 @@
   </style>
 
   <script>
+    // this will return a NodeList (not an array)
+    const inputs = document.querySelectorAll('.controls input');
+
+    function handleUpdate() {
+      // this.dataset grabs all the data from inputs
+      // this.dataset.sizing grabs the data-sizing attribute from the input
+      const suffix = this.dataset.sizing || ''; // the \\ gives us a fallback just in case there is no pixel (px) suffix
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+
+    // trigger a change of the number
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    // trigger a change when we move
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
   </script>
 
 </body>
