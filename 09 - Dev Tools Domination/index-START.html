@@ -18,28 +18,66 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('Hello I am a %s string!', 'super');
 
     // Styled
+    // add %c in front of the thing you want to style
+    console.log('%c I am some super duper text', 'font-size: 50px;');
 
     // warning!
+    console.warn('OH Darn!!! ');
+
 
     // Error :|
+    console.error('Shit!');
 
     // Info
+    console.info('Crocodiles eat 3-4 people per year');
 
     // Testing
+    const p = document.querySelector('p');
+
+    // only fire is somethig is wrong
+    console.asset(1 === 1, 'That is wrong!');
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
 
+    console.clear();
     // Grouping together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age * 7 } dog years old `);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    // will count how many times you run something.
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Wes');
 
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/robynlarsen')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+    });
+
+
+    console.table(dogs);
 
   </script>
 </body>
