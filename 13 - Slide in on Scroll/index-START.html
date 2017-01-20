@@ -58,6 +58,41 @@
       };
     }
 
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide() {
+      // animate the image when we hit about 50% of the image height
+      // figure out how far the page is
+      // console.log(window.scrollY);
+      sliderImages.forEach(sliderImage => {
+        // want to know where
+        // find the currently scroll position
+        // add the height of the current view
+        // then we want to slide in the image at 50% of that height
+        // slideInAt is half way through the image
+        const slideInAt = (window.scrollY + window.innerHeight) - (sliderImage.height / 2);
+        // bottom of the image
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+
+        const isHalfShown = slideInAt > sliderImage.offsetTop;
+
+        // check if we are not scrolled past the image
+        const isNotScrolledPast = window.scrollY < imageBottom;
+
+        if(isHalfShown && isNotScrolledPast) {
+          sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
+        }
+      });
+    }
+
+    // can be a performance issue
+    // we want to debounce so it's only going to run a max
+    // number of times every so often
+    // anytime you're doing something on scroll
+    // you want to debounce your scroll functions
+    window.addEventListener('scroll', debounce(checkSlide));
   </script>
 
   <style>
